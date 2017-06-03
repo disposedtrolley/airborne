@@ -1,0 +1,27 @@
+div.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.sidebar {
+  background-color: red;
+  width: 250px;
+  height: 100vh;
+  padding: 10px;
+}
+
+.main-content {
+  height: 100vh;
+  background-color: blue;
+  padding: 10px;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 100%;
+  }
+
+  .main {
+    width: 100%;
+  }
+}
