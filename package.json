@@ -7,7 +7,6 @@
     "react": "^15.5.4",
     "react-addons-shallow-compare": "^15.5.2",
     "react-dates": "^12.1.1",
-    "react-day-picker": "^5.5.3",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
     "semantic-ui-react": "^0.68.5"

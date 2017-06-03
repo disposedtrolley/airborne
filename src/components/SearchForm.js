@@ -1,10 +1,8 @@
 import React from 'react'
 import { Button, Form, Dropdown, Divider } from 'semantic-ui-react'
-import SearchExampleStandard from './AirportField'
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-import "react-day-picker/lib/style.css"
+import SearchField from './SearchField'
 import "./SearchForm.css"
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import { DateRangePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 var moment = require('moment');
 
@@ -15,7 +13,7 @@ class SearchForm extends React.Component {
     endDate: null,
   }
   render() {
-    const options = [
+    const passengerOptions = [
       { key: 0, text: '0', value: 0 },
       { key: 1, text: '1', value: 1 },
       { key: 2, text: '2', value: 2 },
@@ -30,10 +28,10 @@ class SearchForm extends React.Component {
           <Divider horizontal inverted>Where in the World</Divider>
 
           <Form.Field>
-            <SearchExampleStandard fluid size="large" placeholder="from"/>
+            <SearchField fluid size="large" placeholder="from"/>
           </Form.Field>
           <Form.Field>
-            <SearchExampleStandard fluid size="large" placeholder="to"/>
+            <SearchField fluid size="large" placeholder="to"/>
           </Form.Field>
 
           <Divider horizontal inverted>Dates</Divider>
@@ -47,6 +45,7 @@ class SearchForm extends React.Component {
               onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
               startDatePlaceholderText="departing"
               endDatePlaceholderText="returning"
+              isOutsideRange={date => date < moment().add(-1, 'days')}
             />
           </Form.Field>
 
@@ -54,10 +53,10 @@ class SearchForm extends React.Component {
 
           <Form.Group widths='equal'>
             <Form.Field>
-              <Dropdown placeholder='adults' compact selection options={options} />
+              <Dropdown placeholder='adults' compact selection options={passengerOptions} />
             </Form.Field>
             <Form.Field>
-              <Dropdown placeholder='children' compact selection options={options} />
+              <Dropdown placeholder='children' compact selection options={passengerOptions} />
             </Form.Field>
           </Form.Group>
           
