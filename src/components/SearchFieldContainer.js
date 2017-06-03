@@ -1,13 +1,32 @@
 import _ from 'lodash'
-import faker from 'faker'
 import React, { Component } from 'react'
 import { Search } from 'semantic-ui-react'
 
-const source = _.times(5, () => ({
-  title: faker.company.companyName()
-}))
+class SearchFieldContainer extends Component {
 
-class SearchField extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      airportList:  [
+      {
+        title: "Melbourne (Tullamarine)",
+        description: "MEL"
+      },
+      {
+        title: "Melbourne (Avalon)",
+        description: "AVV"
+      },
+      {
+        title: "Shanghai (Pudong)",
+        description: "PVG"
+      },
+      {
+        title: "Singapore (Changi)",
+        description: "SIN"
+      }]
+    }
+  }
+
   componentWillMount() {
     this.resetComponent()
   }
@@ -27,7 +46,7 @@ class SearchField extends Component {
 
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch),
+        results: _.filter(this.state.airportList, isMatch),
       })
     }, 500)
   }
@@ -42,10 +61,12 @@ class SearchField extends Component {
         onSearchChange={this.handleSearchChange}
         results={results}
         value={value}
-        {...this.props}
+        placeholder={this.props.placeholder}
+        fluid={this.props.fluid}
+        size={this.props.size}
       />
     )
   }
 }
 
-export default SearchField
+export default SearchFieldContainer

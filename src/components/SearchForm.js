@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Dropdown, Divider } from 'semantic-ui-react'
-import SearchField from './SearchField'
-import { DateRangePicker, DayPickerRangeController } from 'react-dates';
+import SearchFieldContainer from './SearchFieldContainer'
+import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 var moment = require('moment');
 
@@ -27,10 +27,10 @@ class SearchForm extends React.Component {
           <Divider horizontal inverted>Where in the World</Divider>
 
           <Form.Field>
-            <SearchField fluid size="large" placeholder="from"/>
+            <SearchFieldContainer fluid size="large" placeholder="from"/>
           </Form.Field>
           <Form.Field>
-            <SearchField fluid size="large" placeholder="to"/>
+            <SearchFieldContainer fluid size="large" placeholder="to"/>
           </Form.Field>
 
           <Divider horizontal inverted>Dates</Divider>
