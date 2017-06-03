@@ -1,10 +1,10 @@
 import React from 'react'
-import { Container } from 'semantic-ui-react'
 import './Home.css'
+import Sidebar from './Sidebar'
 
 const Home = () => (
   <div className="wrapper">
-    <div className="sidebar" />
+    <Sidebar />
     <div className="main-content" />
   </div>
 )

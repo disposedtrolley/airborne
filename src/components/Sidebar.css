@@ -1,0 +1,18 @@
+.sidebar {
+  background-color: red;
+  width: 250px;
+  height: 100vh;
+  padding: 10px;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 100%;
+  }
+
+}
+
+.header-text {
+  font-size: 4em;
+  text-align: center;
+}
