@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button, Form, Dropdown, Divider } from 'semantic-ui-react'
 import SearchField from './SearchField'
-import "./SearchForm.css"
 import { DateRangePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 var moment = require('moment');
