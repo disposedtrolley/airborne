@@ -44,7 +44,7 @@ class SearchForm extends React.Component {
               onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
               startDatePlaceholderText="departing"
               endDatePlaceholderText="returning"
-              isOutsideRange={date => date < moment().add(-1, 'days')}
+              isOutsideRange={date => date < moment()}
             />
           </Form.Field>
 
