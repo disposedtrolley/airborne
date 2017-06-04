@@ -10,19 +10,23 @@ class SearchFieldContainer extends Component {
       airportList:  [
       {
         title: "Melbourne (Tullamarine)",
-        description: "MEL"
+        description: "Australia",
+        price: "MEL"
       },
       {
         title: "Melbourne (Avalon)",
-        description: "AVV"
+        description: "Australia",
+        price: "AVV"
       },
       {
         title: "Shanghai (Pudong)",
-        description: "PVG"
+        description: "China",
+        price: "MEL"
       },
       {
         title: "Singapore (Changi)",
-        description: "SIN"
+        description: "Singapore",
+        price: "SIN"
       }]
     }
   }
