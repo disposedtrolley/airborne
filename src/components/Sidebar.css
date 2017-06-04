@@ -3,13 +3,15 @@
   width: 315px;
   height: 100vh;
   padding: 1em;
+  position: fixed;
 }
 
 @media (max-width: 768px) {
   .sidebar {
     width: 100vh;
     padding-bottom: 1em;
-    max-height: 580px;
+    height: 100%;
+    position: relative;
   }
   .DateRangePicker {
     width: 100%;
