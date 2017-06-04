@@ -11,6 +11,18 @@
     padding-bottom: 1em;
     max-height: 580px;
   }
+  .DateRangePicker {
+    width: 100%;
+  }
+
+  .DateRangePickerInput {
+    width: 100%;
+  }
+
+  .DateRangePickerInput__arrow {
+    margin-left: 8%;
+    margin-right: 8%;
+  }
 }
 
 .header-text {
