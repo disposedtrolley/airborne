@@ -1,9 +1,17 @@
 .sidebar {
   background-color: #64D0BA;
-  width: 315px;
+  width: 380px;
   height: 100vh;
   padding: 1em;
   position: fixed;
+}
+
+.DateRangePicker {
+  width: 100%;
+}
+
+.DateRangePickerInput {
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -12,13 +20,6 @@
     padding-bottom: 1em;
     height: 100%;
     position: relative;
-  }
-  .DateRangePicker {
-    width: 100%;
-  }
-
-  .DateRangePickerInput {
-    width: 100%;
   }
 
   .DateRangePickerInput__arrow {
