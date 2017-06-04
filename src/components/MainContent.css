@@ -1,7 +1,13 @@
 .main-content {
-  padding: 1em;
-  background-color: red;
-  text-align: center;
+  padding: 3em 0 3em 3em;
+  width: 58%;
+  float: right;
+}
+
+@media (min-width: 1150px) {
+  .main-content {
+    width: 70%;
+  }
 }
 
 @media (max-width: 768px) {
