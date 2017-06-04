@@ -1,11 +1,15 @@
 import React from 'react'
+import { Card } from 'semantic-ui-react'
+import FareCard from './FareCard'
 import './MainContent.css'
 
 class MainContent extends React.Component {
   render() {
     return (
       <div className="main-content">
-        <p>Main content</p>
+        <Card.Group>
+          <FareCard />
+        </Card.Group>
       </div>
     )
   }
