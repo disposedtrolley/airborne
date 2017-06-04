@@ -1,9 +1,12 @@
 .main-content {
   padding: 1em;
+  background-color: red;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
-  .main {
-    width: 100%;
+  .main-content {
+    padding-top: 1em;
+    width: 100vh;
   }
 }
