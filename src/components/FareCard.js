@@ -25,20 +25,48 @@ class FareCard extends React.Component {
           <Card.Header>
             airline_name
             <Icon
+              size="large"
               className="button-favourite"
               color="pink"
               name={this.state.isFavourite ? "heart" : "empty heart"}
               onClick={this.handleFavourite}/>
           </Card.Header>
+          <Card.Meta>
+            <span>
+              aircraft_type
+            </span>
+          </Card.Meta>
         </Card.Content>
-        <Card.Content description="MEL to PVG" />
+        <Card.Content>
+          <Card.Description className="fare-description">
+            <table className="flight-times">
+              <tr>
+                <td className="flight-time">10:30am</td>
+                <td><Icon size="big" name="arrow circle right" /></td>
+                <td className="flight-time"> 7:45pm</td>
+              </tr>
+            </table>
+            
+            <table className="flight-durations">
+              <tr>
+                <td>MEL to PVG</td>
+                <td className="flight-duration-value">11 hrs 30 mins</td>
+              </tr>
+              <tr>
+                <td>Stopover in SIN</td>
+                <td className="flight-duration-value">2 hrs 00 mins</td>
+              </tr>
+            </table>
+          </Card.Description>
+        </Card.Content>
         <Card.Content extra>
-          <Button animated>
+          <Button basic color='blue' animated>
             <Button.Content visible>More Info</Button.Content>
             <Button.Content hidden>
               <Icon name='right arrow' />
             </Button.Content>
           </Button>
+          <span className="ticket-price">$999.95</span>
         </Card.Content>
       </Card>
     )

@@ -9,6 +9,11 @@ class MainContent extends React.Component {
       <div className="main-content">
         <Card.Group>
           <FareCard />
+          <FareCard />
+          <FareCard />
+          <FareCard />
+          <FareCard />
+          <FareCard />
         </Card.Group>
       </div>
     )

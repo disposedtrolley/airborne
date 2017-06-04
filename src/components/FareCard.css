@@ -2,3 +2,29 @@
   cursor: pointer;
   float: right;
 }
+
+.flight-times {
+  margin-bottom: 1em;
+}
+
+.flight-time {
+  font-size: 2em;
+}
+
+.flight-durations {
+  margin-left: 0.5em;
+}
+
+.flight-duration-value {
+  font-weight: bold;
+}
+
+td {
+  padding-right: 1em;
+}
+
+.ticket-price {
+  float: right;
+  font-size: 1.5em;
+  margin-top: 0.4em;
+}
