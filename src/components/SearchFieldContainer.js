@@ -1,34 +1,26 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { Search } from 'semantic-ui-react'
+var axios = require('axios');
 
 class SearchFieldContainer extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      airportList:  [
-      {
-        title: "Melbourne (Tullamarine)",
-        description: "Australia",
-        price: "MEL"
-      },
-      {
-        title: "Melbourne (Avalon)",
-        description: "Australia",
-        price: "AVV"
-      },
-      {
-        title: "Shanghai (Pudong)",
-        description: "China",
-        price: "MEL"
-      },
-      {
-        title: "Singapore (Changi)",
-        description: "Singapore",
-        price: "SIN"
-      }]
+      airportList: null,
+      selectedAirport: null
     }
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/airports')
+      .then((result) => {
+        const airports = result.data
+        this.setState({ 
+          airportList: airports
+        })
+      })
   }
 
   componentWillMount() {
@@ -37,7 +29,12 @@ class SearchFieldContainer extends Component {
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
-  handleResultSelect = (e, result) => this.setState({ value: result.title })
+  handleResultSelect = (e, result) => {
+    this.setState({
+      value: result.title,
+      selectedAirport: result.price
+    })
+  }
 
   handleSearchChange = (e, value) => {
     this.setState({ isLoading: true, value })
