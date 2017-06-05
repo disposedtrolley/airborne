@@ -34,6 +34,7 @@ class SearchFieldContainer extends Component {
       value: result.title,
       selectedAirport: result.price
     })
+    this.props.onSelectAirport(result.price)
   }
 
   handleSearchChange = (e, value) => {

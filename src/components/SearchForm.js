@@ -4,13 +4,85 @@ import SearchFieldContainer from './SearchFieldContainer'
 import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 var moment = require('moment');
+var axios = require('axios');
 
 
 class SearchForm extends React.Component {
-  state = {
-    startDate: null,
-    endDate: null,
+  constructor(props) {
+    super(props)
+    this.state = {
+      startDate: null,
+      endDate: null,
+      fromAirport: null,
+      toAirport: null,
+      adultCount: null,
+      childCount: null
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleAdultCountChange = this.handleAdultCountChange.bind(this)
+    this.handleChildCountChange = this.handleChildCountChange.bind(this)
+    this.handleOriginChange = this.handleOriginChange.bind(this)
+    this.handleDestChange = this.handleDestChange.bind(this)
+    this.handleDateChange = this.handleDateChange.bind(this)
   }
+
+  handleSubmit(evt) {
+    evt.preventDefault()
+    console.log(this.state)
+    var deptDate = this.state.startDate.format('YYYY-MM-DD')
+    var returnDate = null
+    if (this.state.endDate) {
+      returnDate = this.state.endDate.format('YYYY-MM-DD')
+    }
+    axios.get('http://localhost:5000/flights', {
+      params: {
+        origin: this.state.fromAirport,
+        dest: this.state.toAirport,
+        adults: this.state.adultCount,
+        children: this.state.childCount,
+        dept_date: deptDate,
+        return_date: returnDate
+      }
+    })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  handleAdultCountChange(evt, data) {
+    this.setState({
+      adultCount: data.value
+    })
+  }
+
+  handleChildCountChange(evt, data) {
+    this.setState({
+      childCount: data.value
+    })
+  }
+
+  handleOriginChange(airportCode) {
+    this.setState({
+      fromAirport: airportCode
+    })
+  }
+
+  handleDestChange(airportCode) {
+    this.setState({
+      toAirport: airportCode
+    })
+  }
+
+  handleDateChange(dates) {
+    this.setState({
+      startDate: dates.startDate,
+      endDate: dates.endDate
+    })
+  }
+
   render() {
     const passengerOptions = [
       { key: 0, text: '0', value: 0 },
@@ -27,10 +99,16 @@ class SearchForm extends React.Component {
           <Divider horizontal inverted>Where in the World</Divider>
 
           <Form.Field>
-            <SearchFieldContainer fluid size="large" placeholder="from"/>
+            <SearchFieldContainer
+              fluid size="large"
+              placeholder="from"
+              onSelectAirport={this.handleOriginChange}/>
           </Form.Field>
           <Form.Field>
-            <SearchFieldContainer fluid size="large" placeholder="to"/>
+            <SearchFieldContainer
+              fluid size="large"
+              placeholder="to"
+              onSelectAirport={this.handleDestChange}/>
           </Form.Field>
 
           <Divider horizontal inverted>Dates</Divider>
@@ -39,7 +117,7 @@ class SearchForm extends React.Component {
             <DateRangePicker
               startDate={this.state.startDate} // momentPropTypes.momentObj or null,
               endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-              onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
+              onDatesChange={this.handleDateChange} // PropTypes.func.isRequired,
               focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
               onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
               startDatePlaceholderText="departing"
@@ -52,14 +130,29 @@ class SearchForm extends React.Component {
 
           <Form.Group widths='equal'>
             <Form.Field>
-              <Dropdown placeholder='adults' compact selection options={passengerOptions} />
+              <Dropdown
+                placeholder='adults'
+                compact
+                selection
+                options={passengerOptions}
+                onChange={this.handleAdultCountChange}/>
             </Form.Field>
             <Form.Field>
-              <Dropdown placeholder='children' compact selection options={passengerOptions} />
+              <Dropdown
+                placeholder='children'
+                compact
+                selection
+                options={passengerOptions}
+                onChange={this.handleChildCountChange}/>
             </Form.Field>
           </Form.Group>
           
-          <Button inverted type='submit' fluid>TAKEOFF!</Button>
+          <Button
+            inverted type='submit'
+            fluid
+            onClick={this.handleSubmit}>
+              TAKEOFF!
+          </Button>
         </Form>
       </div>  
     )
