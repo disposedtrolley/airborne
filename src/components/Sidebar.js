@@ -5,11 +5,22 @@ import './Sidebar.css'
 import SearchForm from './SearchForm'
 
 class Sidebar extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.handleFlightResult = this.handleFlightResult.bind(this)
+  }
+
+  handleFlightResult(data) {
+    this.props.onResult(data)
+  }
+
   render() {
     return (
       <div className="sidebar">
         <h1 className="header-text">airborne</h1>
-        <SearchForm />
+        <SearchForm
+          onResult={this.handleFlightResult}/>
         
         <Divider inverted />
 

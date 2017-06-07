@@ -45,8 +45,8 @@ class SearchForm extends React.Component {
       }
     })
     .then(function (response) {
-      console.log(response.data);
-    })
+      this.props.onResult(response.data)
+    }.bind(this))
     .catch(function (error) {
       console.log(error);
     });

@@ -3,11 +3,32 @@ import './Home.css'
 import Sidebar from './Sidebar'
 import MainContent from './MainContent'
 
-const Home = () => (
-  <div className="wrapper">
-    <Sidebar />
-    <MainContent />
-  </div>
-)
+class Home extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      flightResults: null
+    }
+    this.handleFlightResult = this.handleFlightResult.bind(this)
+  }
+
+  handleFlightResult(data) {
+    // console.log(data)
+    this.setState({
+      flightResults: data
+    })
+  }
+
+  render() {
+    return (
+      <div className="wrapper">
+        <Sidebar
+          onResult={this.handleFlightResult}/>
+        <MainContent
+          flightResults={this.state.flightResults}/>
+      </div>
+    )
+  }
+}
 
 export default Home
