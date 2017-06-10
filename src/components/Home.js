@@ -13,7 +13,6 @@ class Home extends React.Component {
   }
 
   handleFlightResult(data) {
-    // console.log(data)
     this.setState({
       flightResults: data
     })

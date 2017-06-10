@@ -1,6 +1,8 @@
 import React from 'react'
 import { Card, Icon, Button } from 'semantic-ui-react'
 import './FareCard.css'
+var moment = require('moment')
+
 
 class FareCard extends React.Component {
 
@@ -10,6 +12,7 @@ class FareCard extends React.Component {
       isFavourite: false
     }
     this.handleFavourite = this.handleFavourite.bind(this);
+    this.calculateTotalJourneyTime = this.calculateTotalJourneyTime.bind(this)
   }
 
   handleFavourite() {
@@ -18,12 +21,24 @@ class FareCard extends React.Component {
     });
   }
 
+  calculateTotalJourneyTime() {
+    var totalLegTime = this.props.onwardLegs.reduce(function(totalTime, leg) {
+      return totalTime + leg.duration
+    }, 0)
+
+    var totalLayoverTime = this.props.onwardLayovers && this.props.onwardLayovers.reduce(function(totalTime, layover) {
+      return totalTime + layover.duration
+    }, 0)
+
+    return totalLayoverTime + totalLegTime
+  }
+
   render() {
     return (
       <Card fluid>
         <Card.Content>
           <Card.Header>
-            airline_name
+            {Math.floor(this.calculateTotalJourneyTime()/60)} hrs {this.calculateTotalJourneyTime()%60} mins
             <Icon
               size="large"
               className="button-favourite"
@@ -33,7 +48,7 @@ class FareCard extends React.Component {
           </Card.Header>
           <Card.Meta>
             <span>
-              aircraft_type
+              Total Journey Time
             </span>
           </Card.Meta>
         </Card.Content>
@@ -42,23 +57,31 @@ class FareCard extends React.Component {
             <table className="flight-times">
               <tbody>
                 <tr>
-                  <td className="flight-time">10:30am</td>
+                  <td className="flight-time">{this.props.originDeptTime.format('hh:mm A')} </td>
                   <td><Icon size="big" name="arrow circle right" /></td>
-                  <td className="flight-time"> 7:45pm</td>
+                  <td className="flight-time"> {this.props.destArrTime.format('hh:mm A')}</td>
                 </tr>
               </tbody>   
             </table>
             
             <table className="flight-durations">
               <tbody>
-                <tr>
-                  <td>MEL to PVG</td>
-                  <td className="flight-duration-value">11 hrs 30 mins</td>
-                </tr>
-                <tr>
-                  <td>Stopover in SIN</td>
-                  <td className="flight-duration-value">2 hrs 00 mins</td>
-                </tr>
+                  {this.props.onwardLegs.map(function(leg, index) {
+                    return (
+                      <tr>
+                        <td>{leg.origin_code} to {leg.dest_code}</td>
+                        <td className="flight-duration-value">{Math.floor(leg.duration/60)} hrs {leg.duration%60} mins</td>
+                      </tr>
+                    )
+                  })}
+                  {this.props.onwardLayovers.map(function(layover, index) {
+                    return (
+                      <tr>
+                        <td>Stopover in {layover.airport_code}</td>
+                        <td className="flight-duration-value">{Math.floor(layover.duration/60)} hrs {layover.duration%60} mins</td>
+                      </tr>
+                    )
+                  })}
               </tbody> 
             </table>
           </Card.Description>
@@ -70,7 +93,7 @@ class FareCard extends React.Component {
               <Icon name='right arrow' />
             </Button.Content>
           </Button>
-          <span className="ticket-price">$999.95</span>
+          <span className="ticket-price">{this.props.totalCost}</span>
         </Card.Content>
       </Card>
     )
